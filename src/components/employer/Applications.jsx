@@ -27,6 +27,8 @@ import {
 // Temporary data for UI development.
 // Replace with Spring Boot API data later.
 
+
+//dummy data 
 const initialApplicants = [
   {
     id: 1,
@@ -127,6 +129,7 @@ const initialApplicants = [
   },
 ];
 
+
 const jobRoles = [
   "All Active Roles",
   "Senior Cashier & Billing Staff",
@@ -142,6 +145,8 @@ const statusTabs = [
   "Rejected / Archived",
 ];
 
+
+/// Main function
 function Applicants() {
   const [applicants, setApplicants] = useState(initialApplicants);
   const [activeTab, setActiveTab] = useState("All");
@@ -155,6 +160,8 @@ function Applicants() {
   );
   const [selectedApplicant, setSelectedApplicant] = useState(null);
 
+
+  //counts by action like:new shortlisted
   const counts = {
     all: applicants.length,
     new: applicants.filter(a =>
@@ -193,7 +200,7 @@ function Applicants() {
     } else if (activeTab === "Rejected / Archived") {
       result = result.filter(a =>
         ["Rejected", "Archived"].includes(a.status)
-      );
+      ); 
     }
 
     if (search.trim()) {
@@ -268,7 +275,7 @@ function Applicants() {
       a.status,
       a.verified ? "Yes" : "No",
     ]);
-
+ 
     const csv = [headers, ...rows]
       .map(row =>
         row.map(v =>

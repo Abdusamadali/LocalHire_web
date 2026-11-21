@@ -443,7 +443,7 @@ export default function MyApplications() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
+      {/* <Header /> */}
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-16">
         {/* Page heading */}
@@ -688,7 +688,7 @@ export default function MyApplications() {
         </div>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

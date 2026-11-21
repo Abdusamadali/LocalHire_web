@@ -211,7 +211,7 @@ export default function EmployeeAccount() {
         description="Manage your personal details and public profile."
       />
 
-      {/* Profile header */}
+      Profile header
       <div className="flex flex-col sm:flex-row items-center gap-5 p-5 rounded-xl bg-background border border-border mb-7">
         <div className="relative">
           <div className="w-20 h-20 rounded-full bg-primary/10 text-primary flex items-center justify-center">
@@ -748,7 +748,7 @@ export default function EmployeeAccount() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Header />
+      {/* <Header /> */}
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page heading */}
@@ -834,7 +834,7 @@ export default function EmployeeAccount() {
         </div>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

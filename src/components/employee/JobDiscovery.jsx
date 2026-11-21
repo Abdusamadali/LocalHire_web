@@ -28,6 +28,7 @@ import {
   Navigation,
   Heart,
 } from "lucide-react";
+import Header from "../common/Header";
 
 // Mock jobs for frontend development.
 // Replace this array with your Spring Boot API response.
@@ -433,7 +434,7 @@ function JobDiscovery() {
   return (
     <div className="min-h-screen bg-background text-foreground">
 
-      {/* EMPLOYEE HEADER */}
+      {/* EMPLOYEE HEADER
       <header className="sticky top-0 z-40 border-b border-border bg-surface shadow-sm">
 
         <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -519,7 +520,7 @@ function JobDiscovery() {
         </div>
 
         {/* MOBILE NAV */}
-        <div className="flex gap-5 overflow-x-auto border-t border-border px-4 py-3 md:hidden">
+        {/* <div className="flex gap-5 overflow-x-auto border-t border-border px-4 py-3 md:hidden">
           {["Explore Jobs", "My Applications", "Saved Jobs"].map(tab => (
             <button
               key={tab}
@@ -531,9 +532,12 @@ function JobDiscovery() {
               {tab}
             </button>
           ))}
-        </div>
+        </div> */}
 
-      </header>
+      {/* </header> */} 
+
+
+      {/* <Header/> */}
 
       {/* HERO SEARCH SECTION */}
       <section className="border-b border-border bg-surface py-9">
@@ -1287,7 +1291,7 @@ function JobDiscovery() {
       )}
 
       {/* FOOTER */}
-      <footer className="border-t border-border bg-surface px-4 py-6">
+      {/* <footer className="border-t border-border bg-surface px-4 py-6">
 
         <div className="mx-auto flex max-w-[1600px] flex-col justify-between gap-4 text-xs text-muted sm:flex-row sm:items-center">
 
@@ -1309,7 +1313,7 @@ function JobDiscovery() {
 
         </div>
 
-      </footer>
+      </footer> */}
 
     </div>
   );

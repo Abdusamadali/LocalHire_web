@@ -94,13 +94,13 @@ function SignUp() {
 
               <div className="flex gap-3">
 
-                <div className="bg-primary text-white p-3 rounded-xl h-fit">
+                <div className="bg-primary text-primary-foreground p-3 rounded-xl h-fit">
                   <User size={22} />
                 </div>
 
                 <div>
 
-                  <span className="text-xs font-bold text-green-700 bg-green-100 px-2 py-1 rounded-full">
+                  <span className="text-xs font-bold text-success bg-success/10 px-2 py-1 rounded-full">
                     Free for Workers
                   </span>
 
@@ -155,13 +155,13 @@ function SignUp() {
 
               <div className="flex gap-3">
 
-                <div className="bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 p-3 rounded-xl h-fit">
+                <div className="bg-primary/10 text-primary p-3 rounded-xl h-fit">
                   <Briefcase size={22} />
                 </div>
 
                 <div>
 
-                  <span className="text-xs font-bold text-indigo-600 dark:text-indigo-300 bg-indigo-100 dark:bg-indigo-950 px-2 py-1 rounded-full">
+                  <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">
                     Verified Businesses
                   </span>
 
@@ -374,7 +374,7 @@ function SignUp() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 my-8">
 
           <div className="flex gap-2 border border-border bg-surface rounded-2xl p-4 items-center">
-            <CircleDollarSign className="bg-green-400 text-white p-2 rounded-2xl size-12 shrink-0" />
+            <CircleDollarSign className="bg-success text-primary-foreground p-2 rounded-2xl size-12 shrink-0" />
 
             <div>
               <h3 className="font-bold text-heading">
@@ -387,7 +387,7 @@ function SignUp() {
           </div>
 
           <div className="flex gap-2 border border-border bg-surface rounded-2xl p-4 items-center">
-            <BadgeCheck className="bg-blue-200 text-blue-700 p-2 rounded-2xl size-12 shrink-0" />
+            <BadgeCheck className="bg-primary/15 text-primary p-2 rounded-2xl size-12 shrink-0" />
 
             <div>
               <h3 className="font-bold text-heading">
@@ -400,7 +400,7 @@ function SignUp() {
           </div>
 
           <div className="flex gap-2 border border-border bg-surface rounded-2xl p-4 items-center">
-            <CheckCircle className="bg-green-400 text-white p-2 rounded-2xl size-12 shrink-0" />
+            <CheckCircle className="bg-success text-primary-foreground p-2 rounded-2xl size-12 shrink-0" />
 
             <div>
               <h3 className="font-bold text-heading">
@@ -418,7 +418,7 @@ function SignUp() {
         <div className="flex flex-col md:flex-row gap-5 bg-support-bg border border-border p-5 px-6 rounded-2xl justify-between">
 
           <div className="flex gap-3 items-center">
-            <Headset className="size-9 bg-blue-200 dark:bg-blue-900 text-blue-700 dark:text-blue-300 p-1 rounded-lg shrink-0" />
+            <Headset className="size-9 bg-primary/10 text-primary p-1 rounded-lg shrink-0" />
 
             <div>
               <h3 className="font-bold text-heading">
@@ -432,7 +432,7 @@ function SignUp() {
           </div>
 
           <div className="flex gap-2 items-center bg-surface border border-border rounded-2xl px-5 py-3">
-            <Phone className="text-green-500 size-5" />
+            <Phone className="text-success size-5" />
             <span className="text-foreground font-medium">
               1800-245-6677 (toll-free)
             </span>
