@@ -35,12 +35,15 @@ function Login() {
 
   const { status, error } = useSelector((state) => state.auth);
 
-  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    console.log("Login button clicked");
+    console.log("Username:", email);
+    console.log("Password entered:", password.length > 0);
 
     try {
       const result = await dispatch(
@@ -67,7 +70,7 @@ function Login() {
             "Login failed. Please try again.";
 
       console.error("Login error:", error);
-      alert(message);
+      // alert(message);
     }
   };
 
@@ -421,7 +424,7 @@ function Login() {
                       Forgot password?
                     </a>
                   </div>
-                        
+
                   {/* Login button */}
                   <button
                     type="submit"

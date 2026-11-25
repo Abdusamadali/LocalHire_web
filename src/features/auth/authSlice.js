@@ -38,6 +38,41 @@ export const loginUser = createAsyncThunk(
   },
 );
 
+// Signup API call
+export const signupUser = createAsyncThunk(
+  "auth/signup",
+  async (signupData, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post("/auth/signup", signupData);
+
+      return response.data;
+    } catch (error) {
+      console.error("Signup API error:", error);
+
+      if (error.response) {
+        const data = error.response.data;
+
+        return rejectWithValue(
+          typeof data === "string"
+            ? data
+            : data?.detail ||
+                data?.error ||
+                data?.message ||
+                `Signup failed: ${error.response.status}`,
+        );
+      }
+
+      if (error.request) {
+        return rejectWithValue(
+          "Cannot connect to the server. Check your backend connection.",
+        );
+      }
+
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
 // Initial state
 const initialState = {
   token: localStorage.getItem("token") || null,
@@ -50,6 +85,10 @@ const initialState = {
   isAuthenticated: !!localStorage.getItem("token"),
   status: "idle",
   error: null,
+
+  signupStatus: "idle",
+  signupError: null,
+  signupMessage: null,
 };
 
 // Auth slice
@@ -67,6 +106,10 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.status = "idle";
       state.error = null;
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("role");
+      localStorage.removeItem("userId");
     },
   },
 
@@ -90,6 +133,21 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+      })
+      ///signUp thing
+      .addCase(signupUser.pending, (state) => {
+        state.signupStatus = "loading";
+        state.signupError = null;
+        state.signupMessage = null;
+      })
+      .addCase(signupUser.fulfilled, (state, action) => {
+        state.signupStatus = "succeeded";
+        state.signupMessage =
+          action.payload?.message || "Account created successfully.";
+      })
+      .addCase(signupUser.rejected, (state, action) => {
+        state.signupStatus = "failed";
+        state.signupError = action.payload || action.error?.message;
       });
   },
 });

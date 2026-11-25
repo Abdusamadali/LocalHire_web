@@ -218,7 +218,7 @@ export default function EmployeeAccount() {
             <UserRound size={36} />
           </div>
 
-          <button
+          <button   
             type="button"
             title="Change profile photo"
             className="absolute bottom-0 right-0 p-2 rounded-full bg-primary text-primary-foreground border-2 border-surface"
