@@ -7,10 +7,10 @@ import EmployerNavbar from '../employer/EmployerNavbar';
 
 function Header() {
 
-    // const role = localStorage.getItem("role");
+    const role = localStorage.getItem("role");
 
-    // const role = "EMPLOYEE";
-    const role = "EMPLOYER"
+    // // const role = "EMPLOYEE";
+    // const role = "EMPLOYER"
 
     return (
         <div>
