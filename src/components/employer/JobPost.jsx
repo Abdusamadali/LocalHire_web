@@ -1,5 +1,6 @@
-
 import React, { useState } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
 import {
   BriefcaseBusiness,
   MapPin,
@@ -8,6 +9,9 @@ import {
   Eye,
   Send,
 } from "lucide-react";
+
+import { createJob } from "../../features/jobs/jobSlice";
+
 
 const initialForm = {
   category: "HELPER",
@@ -51,9 +55,7 @@ function Field({ label, required, error, children }) {
 
       {children}
 
-      {error && (
-        <p className="mt-1 text-xs text-red-500">{error}</p>
-      )}
+      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
     </div>
   );
 }
@@ -74,6 +76,10 @@ function Section({ icon: Icon, title, children }) {
 }
 
 function PostJob() {
+  const dispatch = useDispatch();
+
+  const { createJob, status, error } = useSelector((state) => state.jobs);
+
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [showPreview, setShowPreview] = useState(false);
@@ -101,10 +107,7 @@ function PostJob() {
       newErrors.minSalary = "Enter a valid minimum salary";
     }
 
-    if (
-      !form.maxSalary ||
-      Number(form.maxSalary) < Number(form.minSalary)
-    ) {
+    if (!form.maxSalary || Number(form.maxSalary) < Number(form.minSalary)) {
       newErrors.maxSalary =
         "Maximum salary must be at least the minimum salary";
     }
@@ -145,14 +148,12 @@ function PostJob() {
 
     const payload = getPayload();
 
-    // We will connect this to the Redux async thunk next.
-    console.log("Publish job:", payload);
+    dispatch(createJob(payload));
   };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-
         {/* Page heading */}
         <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div>
@@ -161,9 +162,7 @@ function PostJob() {
               Employer Portal
             </div>
 
-            <h1 className="text-2xl font-bold sm:text-3xl">
-              Post a Job
-            </h1>
+            <h1 className="text-2xl font-bold sm:text-3xl">Post a Job</h1>
 
             <p className="mt-2 text-sm text-muted">
               Provide the job details to find suitable local workers.
@@ -181,29 +180,20 @@ function PostJob() {
         </div>
 
         <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
-
           {/* Form */}
           <div className="space-y-6">
-
             {/* Job information */}
-            <Section
-              icon={BriefcaseBusiness}
-              title="Job Information"
-            >
+            <Section icon={BriefcaseBusiness} title="Job Information">
               <div className="grid gap-5 sm:grid-cols-2">
-
                 <Field label="Job Category" required>
                   <select
                     className={inputClass}
                     value={form.category}
-                    onChange={(e) =>
-                      updateField("category", e.target.value)
-                    }
+                    onChange={(e) => updateField("category", e.target.value)}
                   >
                     {jobCategories.map((category) => (
                       <option key={category} value={category}>
-                        {category.charAt(0) +
-                          category.slice(1).toLowerCase()}
+                        {category.charAt(0) + category.slice(1).toLowerCase()}
                       </option>
                     ))}
                   </select>
@@ -213,9 +203,7 @@ function PostJob() {
                   <select
                     className={inputClass}
                     value={form.shift}
-                    onChange={(e) =>
-                      updateField("shift", e.target.value)
-                    }
+                    onChange={(e) => updateField("shift", e.target.value)}
                   >
                     {shifts.map((shift) => (
                       <option key={shift.value} value={shift.value}>
@@ -250,10 +238,7 @@ function PostJob() {
             </Section>
 
             {/* Salary */}
-            <Section
-              icon={IndianRupee}
-              title="Salary Details"
-            >
+            <Section icon={IndianRupee} title="Salary Details">
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field
                   label="Minimum Monthly Salary (₹)"
@@ -266,9 +251,7 @@ function PostJob() {
                     className={inputClass}
                     placeholder="e.g. 12000"
                     value={form.minSalary}
-                    onChange={(e) =>
-                      updateField("minSalary", e.target.value)
-                    }
+                    onChange={(e) => updateField("minSalary", e.target.value)}
                   />
                 </Field>
 
@@ -283,21 +266,15 @@ function PostJob() {
                     className={inputClass}
                     placeholder="e.g. 18000"
                     value={form.maxSalary}
-                    onChange={(e) =>
-                      updateField("maxSalary", e.target.value)
-                    }
+                    onChange={(e) => updateField("maxSalary", e.target.value)}
                   />
                 </Field>
               </div>
             </Section>
 
             {/* Location */}
-            <Section
-              icon={MapPin}
-              title="Job Location"
-            >
+            <Section icon={MapPin} title="Job Location">
               <div className="grid gap-5 sm:grid-cols-2">
-
                 <div className="sm:col-span-2">
                   <Field
                     label="Area / Street Address"
@@ -308,25 +285,17 @@ function PostJob() {
                       className={inputClass}
                       placeholder="e.g. Sector 22"
                       value={form.area}
-                      onChange={(e) =>
-                        updateField("area", e.target.value)
-                      }
+                      onChange={(e) => updateField("area", e.target.value)}
                     />
                   </Field>
                 </div>
 
-                <Field
-                  label="City"
-                  required
-                  error={errors.city}
-                >
+                <Field label="City" required error={errors.city}>
                   <input
                     className={inputClass}
                     placeholder="e.g. Chandigarh"
                     value={form.city}
-                    onChange={(e) =>
-                      updateField("city", e.target.value)
-                    }
+                    onChange={(e) => updateField("city", e.target.value)}
                   />
                 </Field>
 
@@ -334,15 +303,11 @@ function PostJob() {
                   <select
                     className={inputClass}
                     value={form.state}
-                    onChange={(e) =>
-                      updateField("state", e.target.value)
-                    }
+                    onChange={(e) => updateField("state", e.target.value)}
                   >
                     <option value="Punjab">Punjab</option>
                     <option value="Haryana">Haryana</option>
-                    <option value="Himachal Pradesh">
-                      Himachal Pradesh
-                    </option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
                     <option value="Chandigarh">Chandigarh</option>
                     <option value="Delhi">Delhi</option>
                     <option value="Uttar Pradesh">Uttar Pradesh</option>
@@ -351,11 +316,7 @@ function PostJob() {
                   </select>
                 </Field>
 
-                <Field
-                  label="PIN Code"
-                  required
-                  error={errors.pincode}
-                >
+                <Field label="PIN Code" required error={errors.pincode}>
                   <input
                     className={inputClass}
                     placeholder="6-digit PIN code"
@@ -363,10 +324,7 @@ function PostJob() {
                     inputMode="numeric"
                     value={form.pincode}
                     onChange={(e) =>
-                      updateField(
-                        "pincode",
-                        e.target.value.replace(/\D/g, "")
-                      )
+                      updateField("pincode", e.target.value.replace(/\D/g, ""))
                     }
                   />
                 </Field>
@@ -374,28 +332,40 @@ function PostJob() {
             </Section>
 
             {/* Publish */}
-            <div className="flex justify-end rounded-2xl border border-border bg-surface p-5">
-              <button
-                type="button"
-                onClick={handlePublish}
-                className="flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
-              >
-                <Send size={17} />
-                Publish Job
-              </button>
+            <div className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-5">
+              {status === "failed" && (
+                <p className="text-sm text-red-500">
+                  {error || "Something went wrong. Please try again."}
+                </p>
+              )}
+
+              {status === "succeeded" && (
+                <p className="text-sm text-green-600">
+                  Job published successfully!
+                </p>
+              )}
+
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  onClick={handlePublish}
+                  disabled={status === "loading"}
+                  className="flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  <Send size={17} />
+
+                  {status === "loading" ? "Publishing..." : "Publish Job"}
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Preview */}
           {showPreview && (
             <aside className="rounded-2xl border border-border bg-surface p-5 lg:sticky lg:top-24">
-              <h2 className="mb-5 font-semibold">
-                Job Preview
-              </h2>
+              <h2 className="mb-5 font-semibold">Job Preview</h2>
 
-              <p className="text-lg font-bold">
-                {form.category}
-              </p>
+              <p className="text-lg font-bold">{form.category}</p>
 
               <p className="mt-1 text-xs text-muted">
                 {shifts.find((s) => s.value === form.shift)?.label}
@@ -403,8 +373,7 @@ function PostJob() {
 
               <p className="mt-4 font-bold text-green-600">
                 ₹{Number(form.minSalary || 0).toLocaleString("en-IN")}
-                {" - "}
-                ₹{Number(form.maxSalary || 0).toLocaleString("en-IN")}
+                {" - "}₹{Number(form.maxSalary || 0).toLocaleString("en-IN")}
                 <span className="font-normal text-muted"> / month</span>
               </p>
 
@@ -422,9 +391,7 @@ function PostJob() {
                 </p>
               </div>
 
-              <h3 className="mb-2 text-sm font-semibold">
-                Description
-              </h3>
+              <h3 className="mb-2 text-sm font-semibold">Description</h3>
 
               <p className="whitespace-pre-wrap text-sm leading-6 text-muted">
                 {form.description || "Job description will appear here."}
